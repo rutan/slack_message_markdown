@@ -18,7 +18,7 @@ describe SlackMessageMarkdown::Filters::SlackMessageFilter do
   end
 
   context 'triple blockquote' do
-    let(:text) { "Hey\n>>>\nThis is\nquote." }
+    let(:text) { "Hey\n&gt;&gt;&gt; This is\nquote." }
     it { should eq "Hey<br />\n<blockquote>\nThis is<br />\nquote.\n</blockquote>\n" }
   end
 end

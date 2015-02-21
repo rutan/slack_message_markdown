@@ -12,7 +12,7 @@ module Kramdown
         @span_parsers = [:codespan, :html_entity]
       end
 
-      MULTIPLE_BLOCKQUOTE_START = /^#{OPT_SPACE}>>>\s*\n.+/m
+      MULTIPLE_BLOCKQUOTE_START = /^#{OPT_SPACE}>>>.+\n.+/m
 
       def parse_multiple_blockquote
         start_line_number = @src.current_line_number

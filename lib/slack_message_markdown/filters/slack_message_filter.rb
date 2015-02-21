@@ -26,7 +26,7 @@ module SlackMessageMarkdown
       def link_mention(uid)
         user = @context[:on_get_user] ? @context[:on_get_user].call(uid) : nil
         if user
-          "<a href=\"#{EscapeUtils.escape_url user[:url].to_s}\" class=\"mention\">@#{EscapeUtils.escape_html user[:name].to_s}</a>"
+          "<a href=\"#{EscapeUtils.escape_html user[:url].to_s}\" class=\"mention\">@#{EscapeUtils.escape_html user[:name].to_s}</a>"
         else
           "&lt;@#{uid}&gt;"
         end
@@ -35,14 +35,18 @@ module SlackMessageMarkdown
       def link_channel(uid)
         channel = @context[:on_get_channel] ? @context[:on_get_channel].call(uid) : nil
         if channel
-          "<a href=\"#{EscapeUtils.escape_url channel[:url].to_s}\" class=\"channel\">##{EscapeUtils.escape_html channel[:name].to_s}</a>"
+          "<a href=\"#{EscapeUtils.escape_html channel[:url].to_s}\" class=\"channel\">##{EscapeUtils.escape_html channel[:name].to_s}</a>"
         else
           "&lt;##{uid}&gt;"
         end
       end
 
       def link_url(url)
-        "<a href=\"#{context[:cushion_link]}#{EscapeUtils.escape_url url}\">#{EscapeUtils.escape_html url}</a>"
+        if context[:cushion_link]
+          "<a href=\"#{context[:cushion_link]}#{EscapeUtils.escape_url url}\">#{EscapeUtils.escape_html url}</a>"
+        else
+          "<a href=\"#{EscapeUtils.escape_html url}\">#{EscapeUtils.escape_html url}</a>"
+        end
       end
     end
   end
